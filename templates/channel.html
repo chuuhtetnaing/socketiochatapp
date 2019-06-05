@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block head %}
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+	<script src="{{ url_for('static', filename='message.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+{% if error %}
+
+<h1>Channel name doesn't exist</h1>
+
+{% else %}
+
+<h2>Welcome to <i id="channelname">{{channelname}}</i> Chatroom</h2>
+
+<ul id="messages">
+	{% for message in messages %}
+		<li>
+				{{ message[0] }}
+				<br>
+				By <b>{{ message[1] }}</b> At <i>{{message[2]}}</i>
+		</li>
+	{% endfor %}
+</ul>
+
+<input type="text" id="message" name="message" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+
+<button id="send" class="btn btn-primary">Send</button>
+
+<a href="{{url_for('channel_quit')}}" class="btn btn-primary">quit</a>
+
+
+{% endif %}
+
+
+
+{% endblock %}

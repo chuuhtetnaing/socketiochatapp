@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+
+<div class="list-group">
+  {% for channel in channels%}
+    <a href="channel/{{ channel }}" class="list-group-item list-group-item-action">
+    	{{ channel }}
+    </a>
+  {% endfor %}
+  
+  <form action="{{url_for('channel_create')}}" id="channel_create" method="post">
+	  <div id="non_user" class="input-group input-group-lg">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text" id="inputGroup-sizing-lg">Create New Channel</span>
+	  </div>
+	  
+	  <input type="text" id="get_channelname" name="channelname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+	  <input type="submit" class="btn btn-primary">
+	  
+	  </div>
+  </form>
+</div>
+
+{% endblock %}
