@@ -6,9 +6,15 @@ from flask import Flask, session, jsonify, redirect, url_for, render_template, r
 from flask_session import Session
 from flask_socketio import SocketIO, emit
 
+REDIS_URL = os.environ['REDIS_URL']
+REDIS_CHAN = 'application'
+
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
+
+sockets = Sockets(app)
+redis = redis.from_url(REDIS_URL)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
